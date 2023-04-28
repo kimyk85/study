@@ -13,3 +13,4 @@
    - ```curl -X POST -d 'json={"json":"message"}' http://127.0.0.1:9880/sample.test```
  - 도커 로그로 Fluentd로 유입된 데이터 확인
    - ```docker logs -f dataPipeline_fluentd```
+ 
