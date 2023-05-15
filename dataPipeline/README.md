@@ -3,6 +3,7 @@
  - 만약에 도커로 생성된 적이 있다면 아래 명령어로 중지와 삭제
    - ```docker-compose stop```
    - ```docker-compose rm```
+ - yml 파일 수정 후 재생성 명령어: ```docker-compose up --build --force-recreate -d```
 
 # Nginx 테스트
  - 방법 1. 브라우저에서 localhost 접속

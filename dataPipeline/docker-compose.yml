@@ -1,23 +1,29 @@
 version: '3'
 services:
+  fluentd:
+    image: fluent/fluentd
+    ports:
+      - 24224:24224
+    volumes:
+      - ./fluent/fluent.conf:/fluentd/etc/fluent.conf
+    container_name: study_ft
   nginx:
     image: nginx:latest
     ports:
       - 80:80
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-    container_name: dataPipeline_web
-#    logging:
-#      driver: "fluentd"
-#      options:
-#        fluentd-address: localhost:24224
-#        tag: sample
+    container_name: study_web
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: 127.0.0.1:24224
+        tag: sample
     depends_on:
       - fluentd
-  fluentd:
-    image: fluent/fluentd:edge-debian
-    ports:
-      - 24224:24224
-    volumes:
-      - ./fluent/fluent.conf:/fluentd/etc/fluent.conf
-    container_name: dataPipeline_fluentd
+#    healthcheck:
+#      test: ["CMD", "curl", "--fail", "http://localhost/health"]"
+#      interval: 10s
+#      retries: 5
+#      start_period: 5s
+#      timeout: 10s
